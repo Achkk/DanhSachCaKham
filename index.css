@@ -338,6 +338,41 @@ body {
     color: #4b5563;
 }
 
+/* Nut xoa nhanh (x) trong the select */
+.btn-clear-select {
+    position: absolute;
+    right: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    z-index: 2;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.15s;
+}
+
+.btn-clear-select:hover {
+    color: #4b5563;
+}
+
+/* Khi the select co gia tri: hover hoac focus se an mui ten va hien nut x */
+.select-wrap.has-value:hover .icon-select,
+.select-wrap.has-value:focus-within .icon-select {
+    display: none;
+}
+
+.select-wrap.has-value:hover .btn-clear-select,
+.select-wrap.has-value:focus-within .btn-clear-select {
+    display: flex;
+}
+
 /* Icon dinh vi goc phai trong input / select */
 .icon-right,
 .icon-select {

@@ -59,16 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const fieldItems = document.querySelectorAll('.field-item');
 
     // 3. HAM TIEN ICH
-    // Cap nhat mau placeholder khi chua chon gia tri
-    const updatePlaceholderColor = (sel) => {
-        sel.classList.toggle('is-placeholder', !sel.value);
+    // Cap nhat trang thai placeholder va class has-value cho the select
+    const updateSelectState = (sel) => {
+        const wrap = sel.closest('.select-wrap');
+        const hasVal = Boolean(sel.value && sel.value.trim());
+        sel.classList.toggle('is-placeholder', !hasVal);
+        if (wrap) {
+            wrap.classList.toggle('has-value', hasVal);
+        }
     };
 
     // Nap danh sach option vao the select
     const populateSelect = (sel, defaultText, items = []) => {
         sel.innerHTML = `<option value="" selected disabled hidden>${defaultText}</option>` +
             items.map(name => `<option value="${name}">${name}</option>`).join('');
-        updatePlaceholderColor(sel);
+        updateSelectState(sel);
     };
 
     // Kiem tra truong bat buoc (dua vao dau * hoac id gender)
@@ -84,10 +89,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (wrap) wrap.classList.toggle('has-error', hasError);
     };
 
-    // 4. KHOI TAO SELECT DROPDOWNS
+    // 4. KHOI TAO SELECT DROPDOWNS & NUT CLEAR (X)
     selects.forEach(sel => {
-        sel.addEventListener('change', () => updatePlaceholderColor(sel));
-        updatePlaceholderColor(sel);
+        sel.addEventListener('change', () => updateSelectState(sel));
+        updateSelectState(sel);
+
+        const wrap = sel.closest('.select-wrap');
+        const btnClear = wrap?.querySelector('.btn-clear-select');
+        if (btnClear) {
+            const clearSelect = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                sel.value = '';
+                sel.dispatchEvent(new Event('change'));
+            };
+
+            btnClear.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            btnClear.addEventListener('click', clearSelect);
+        }
     });
 
     // Dropdown Tinh/Thanh pho lien hoan
@@ -140,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
             patientForm.reset();
             populateSelect(selectDistrict, 'Quận/Huyện');
             populateSelect(selectWard, 'Phường/Xã');
-            selects.forEach(updatePlaceholderColor);
+            selects.forEach(updateSelectState);
             if (patientName) {
                 patientName.value = '';
                 patientName.dispatchEvent(new Event('input'));
