@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách ca khám</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="sidebar-strip"></div>
+    <div class="main-container">
+        <div class="top-nav-bar">
+            <div class="top-tab-active">
+                <span>Danh sách ca khám</span>
+            </div>
+            <div class="top-user-area">
+                <div class="clinic-title">
+                    <span>TRUNG DUC Clinic</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="account-title">
+                    <span>Thanhvtt</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <img src="image/1.jpg" alt="Avatar" class="user-avatar">
+            </div>
+        </div>
+        <div class="content-card">
+            <div class="left-col" id="leftCol">
+                <div class="sub-tabs-bar">
+                    <div class="sub-tab-item active" data-tab="them-ca-kham">
+                        <i class="fa-solid fa-circle-user"></i>
+                        <span>THÊM CA KHÁM</span>
+                    </div>
+                    <div class="sub-tab-item" data-tab="thong-tin-nguoi-benh">
+                        <i class="fa-solid fa-user"></i>
+                        <span>THÔNG TIN NGƯỜI BỆNH</span>
+                    </div>
+                </div>
+
+                <div id="contentThemCaKham">
+                    <div class="patient-title-row">
+                        <h3>Thông tin người bệnh</h3>
+                        <button type="button" class="btn-refresh" id="btnRefresh" title="Làm mới">
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </button>
+                    </div>
+
+                    <form id="patientForm" class="patient-form">
+                        <div class="form-row grid-2">
+                            <div class="field-item">
+                                <div class="input-wrap">
+                                    <input type="text" id="patientName" value="Nguyễn Tô Lâm" placeholder="Họ và tên*">
+                                    <button type="button" class="btn-clear" id="btnClearName" title="Xóa tên">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                                <span class="error-msg" style="display: none;">Cần nhập thông tin bắt buộc</span>
+                            </div>
+                            <div class="field-item">
+                                <div class="input-wrap">
+                                    <input type="text" id="cccd" placeholder="CCCD/Hộ chiếu">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row grid-4">
+                            <div class="field-item">
+                                <div class="input-wrap has-error">
+                                    <input type="text" id="dob" placeholder="Ngày sinh*">
+                                    <i class="fa-regular fa-calendar icon-right"></i>
+                                </div>
+                                <span class="error-msg">Cần nhập thông tin bắt buộc</span>
+                            </div>
+
+                            <div class="field-item">
+                                <div class="select-wrap has-error">
+                                    <select id="gender">
+                                        <option value="" selected disabled hidden>Giới tính*</option>
+                                        <option value="male">Nam</option>
+                                        <option value="female">Nữ</option>
+                                        <option value="other">Khác</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down icon-select"></i>
+                                </div>
+                                <span class="error-msg">Cần nhập thông tin bắt buộc</span>
+                            </div>
+
+                            <div class="field-item">
+                                <div class="input-wrap">
+                                    <input type="tel" id="phone" placeholder="Số điện thoại">
+                                </div>
+                            </div>
+
+                            <div class="field-item">
+                                <div class="input-wrap">
+                                    <input type="email" id="email" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row grid-4">
+                            <div class="field-item">
+                                <div class="select-wrap">
+                                    <select id="province">
+                                        <option value="" selected disabled hidden>Tỉnh/Thành phố</option>
+                                        <option value="hanoi">Hà Nội</option>
+                                        <option value="danang">Đà Nẵng</option>
+                                        <option value="hcm">TP. Hồ Chí Minh</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down icon-select"></i>
+                                </div>
+                            </div>
+
+                            <div class="field-item">
+                                <div class="select-wrap">
+                                    <select id="district">
+                                        <option value="" selected disabled hidden>Quận/Huyện</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down icon-select"></i>
+                                </div>
+                            </div>
+
+                            <div class="field-item">
+                                <div class="select-wrap">
+                                    <select id="ward">
+                                        <option value="" selected disabled hidden>Phường/Xã</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down icon-select"></i>
+                                </div>
+                            </div>
+
+                            <div class="field-item">
+                                <div class="input-wrap">
+                                    <input type="text" id="address" placeholder="Địa chỉ">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row grid-2">
+                            <div class="field-item">
+                                <div class="input-wrap">
+                                    <input type="text" id="bhytCode" placeholder="Mã thẻ BHYT">
+                                </div>
+                            </div>
+
+                            <div class="field-item">
+                                <div class="input-wrap has-error">
+                                    <input type="text" id="bhytDate" placeholder="Ngày bắt đầu BHYT - Ngày kết thúc BHYT">
+                                    <i class="fa-regular fa-calendar icon-right"></i>
+                                </div>
+                                <span class="error-msg">Ngày kết thúc phải sau ngày bắt đầu</span>
+                            </div>
+                        </div>
+
+                        <div class="form-btn-row">
+                            <button type="submit" class="btn-save">
+                                <i class="fa-regular fa-floppy-disk"></i>
+                                <span>Lưu lại</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="contentThongTinNguoiBenh" style="display: none;"></div>
+            </div>
+
+            <div class="resizer" id="resizer" title="Kéo để co giãn hai bên"></div>
+            <div class="right-col" id="rightCol"></div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
