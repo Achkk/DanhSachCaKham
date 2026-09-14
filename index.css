@@ -389,7 +389,8 @@ body {
 .error-msg {
     font-size: 11px;
     color: var(--error-color);
-    margin-top: 3px;
+    margin-top: 5px;
+    margin-bottom: 4px;
     line-height: 1.2;
 }
 
